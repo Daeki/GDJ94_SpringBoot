@@ -22,11 +22,11 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@GetMapping("list")
-	public void list(@RequestParam(defaultValue = "1") Long page, Model model)throws Exception{
-		Pager pager = new Pager();
-		log.info("호출전 : {}", pager.getTotalPage());
-		List<NoticeDTO> list= noticeService.list(page, pager);
-		log.info("호출후 : {}", pager.getTotalPage());
+	public void list(Pager pager, Model model)throws Exception{
+		
+
+		List<NoticeDTO> list= noticeService.list(pager);
+	
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
 	}

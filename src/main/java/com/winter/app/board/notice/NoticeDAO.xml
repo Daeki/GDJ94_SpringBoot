@@ -15,7 +15,7 @@
     	
     	<select id="list" resultType="NoticeDTO" parameterType="Pager">
     		SELECT * FROM notice ORDER BY board_num DESC
-    		LIMIT #{startNum}, #{countNum}
+    		LIMIT #{startNum}, #{perPage}
     	</select>
     	
     	
