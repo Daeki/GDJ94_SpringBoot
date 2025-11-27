@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,6 +30,17 @@ public class NoticeController {
 	
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
+	}
+	
+	@GetMapping("add")
+	public void add()throws Exception{}
+	
+	@PostMapping("add")
+	public String add(NoticeDTO noticeDTO)throws Exception{
+		int result = noticeService.add(noticeDTO);
+		
+		return "redirect:./list";
+		
 	}
 
 }

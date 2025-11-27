@@ -48,10 +48,14 @@ public class Pager {
 //	a) 총 글의 갯수
 	public void pageing(Long totalCount)throws Exception{		
 //	b) 총 글의 갯수로 총 페이지 구하기
-		Long totalPage = totalCount/this.getPerPage();
-		if(totalCount%this.perPage !=0) {
-			totalPage++;
-		}
+		
+		Long totalPage =  (long)Math.ceil((double)totalCount/this.getPerPage());
+		
+		
+//		Long totalPage = totalCount/this.getPerPage();
+//		if(totalCount%this.perPage !=0) {
+//			totalPage++;
+//		}
 		
 //   page값이 totalpage의 값의 범위를 벗어 난 경우(보다 큰경우)
 		if(this.getPage()>totalPage) {

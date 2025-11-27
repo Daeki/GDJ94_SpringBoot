@@ -57,7 +57,7 @@
                     		</tbody>
                     	</table>
             		</div>
-            		<div class="row justify-content-center">
+            		<div class="row justify-content-between col-sm-8 offset-sm-2">
                     	<nav aria-label="Page navigation example">
 						  <ul class="pagination ">
 						    <li class="page-item">
@@ -75,6 +75,11 @@
 						    </li>
 						  </ul>
 						</nav>
+						
+						<div>
+							<a href="./add"  class="btn btn-primary">글쓰기</a>
+						</div>
+						
                     </div>
                     
                 
