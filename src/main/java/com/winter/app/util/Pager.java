@@ -7,6 +7,9 @@ import lombok.Setter;
 @Getter
 public class Pager {
 	
+	private String kind;
+	private String search;
+	
 	private Long page;
 	
 	private Long startNum;
@@ -46,7 +49,10 @@ public class Pager {
 	
 	//1. 페이징 계산
 //	a) 총 글의 갯수
-	public void pageing(Long totalCount)throws Exception{		
+	public void pageing(Long totalCount)throws Exception{
+		if(totalCount<1) {
+			totalCount=1L;
+		}
 //	b) 총 글의 갯수로 총 페이지 구하기
 		
 		Long totalPage =  (long)Math.ceil((double)totalCount/this.getPerPage());

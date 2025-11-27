@@ -32,6 +32,16 @@ public class NoticeController {
 		model.addAttribute("pager", pager);
 	}
 	
+	@GetMapping("detail")
+	public void detail(NoticeDTO noticeDTO, Model model)throws Exception{
+		noticeDTO = noticeService.detail(noticeDTO);
+		
+		//null(조회실패시 처리)
+		
+		model.addAttribute("dto", noticeDTO);
+		
+	}
+	
 	@GetMapping("add")
 	public void add()throws Exception{}
 	

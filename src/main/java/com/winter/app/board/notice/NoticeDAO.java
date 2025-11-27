@@ -9,7 +9,7 @@ import com.winter.app.util.Pager;
 @Mapper
 public interface NoticeDAO {
 	
-	public Long count()throws Exception;
+	public Long count(Pager pager)throws Exception;
 	
 	public List<NoticeDTO> list (Pager pager)throws Exception;
 	
