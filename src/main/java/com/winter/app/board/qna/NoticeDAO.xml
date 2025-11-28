@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="com.winter.app.board.notice.NoticeDAO">
+    <mapper namespace="com.winter.app.board.qna.QnaDAO">
     	<!-- 반복되는 쿼리를 모아논것 -->
     	<sql id="search">
     	   	<if test="kind == 'k1'">
@@ -41,10 +41,22 @@
     	
     	
 
-    	<insert id="add" parameterType="NoticeDTO">
-    		INSERT INTO notice (board_title, board_writer, board_contents, board_date, board_hit)
-    		VALUES (#{boardTitle}, #{boardWriter}, #{boardContents}, now(), 0)
+    	<insert id="add" parameterType="NoticeDTO" useGeneratedKeys="true" keyProperty="board_num" >
+    		INSERT INTO 
+    		qna (board_title, board_writer, board_contents, board_date, board_hit, board_ref, board_step, board_depth)
+    		VALUES (#{boardTitle}, #{boardWriter}, #{boardContents}, now(), 0, 0, 0, 0)
     	</insert>
+    	
+    	<update id="refUpdate" parameterType="QnaDTO">
+    		UPDATE qna SET board_ref=#{boardNum} WHERE board_num=#{boardNum}
+    	</update>
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	
     	<delete id="delete" parameterType="NoticeDTO">
     		DELETE FROM notice WHERE board_num=#{boardNum} 
