@@ -40,22 +40,23 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Board Add</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">${category} ${sub}</h6>
                                 </div>
                                 <div class="card-body">
                                    <form method="post">
+                                   	  <input type="hidden" name="boardNum" value="${dto.boardNum}">
 									  <div class="form-group">
 									    <label for="writer">Writer</label>
-									    <input type="text" class="form-control" id="writer" name="boardWriter" aria-describedby="emailHelp">
+									    <input type="text" class="form-control" value="${dto.boardWriter}" id="writer" name="boardWriter" aria-describedby="emailHelp">
 									  </div>
 									  <div class="form-group">
 									    <label for="title">Title</label>
-									    <input type="text" class="form-control" name="boardTitle" id="title">
+									    <input type="text" class="form-control" value="${dto.boardTitle}" name="boardTitle" id="title">
 									  </div>
 									  
 									  <div class="form-group">
 									    <label for="contents">Contents</label>
-									    <textarea class="form-control" name="boardContents" id="contents" rows="3"></textarea>
+									    <textarea class="form-control" name="boardContents" id="contents" rows="3">${dto.boardContents}</textarea>
 									  </div>
 									
 									  <button type="submit" class="btn btn-primary">Submit</button>

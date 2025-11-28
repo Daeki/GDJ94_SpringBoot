@@ -12,6 +12,13 @@ public class QnaDTO extends BoardDTO {
 	
 	private Long boardRef;
 	private Long boardStep;
-	private Long boardDepth;
+	private long boardDepth;
+	
+	public Long getBoardRef() {
+		if(this.boardRef==null) {
+			this.boardRef=0L;
+		}
+		return this.boardRef;
+	}
 
 }
