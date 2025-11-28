@@ -1,4 +1,4 @@
-package com.winter.app.board.notice;
+package com.winter.app.board.qna;
 
 import java.util.List;
 
@@ -18,37 +18,29 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/notice/*")
 @Slf4j
-public class NoticeController {
+public class QnaController {
 	
 	@Autowired
-	private NoticeService noticeService;
+	private QnaService qnaService;
 	
 	@GetMapping("list")
 	public void list(Pager pager, Model model)throws Exception{
 		
 
-		List<BoardDTO> list= noticeService.list(pager);
+		List<BoardDTO> list= qnaService.list(pager);
 	
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
 	}
 	
-	@GetMapping("detail")
-	public void detail(BoardDTO boardDTO, Model model)throws Exception{
-		boardDTO = noticeService.detail(boardDTO);
-		
-		//null(조회실패시 처리)
-		
-		model.addAttribute("dto", boardDTO);
-		
-	}
+
 	
 	@GetMapping("add")
 	public void add()throws Exception{}
 	
 	@PostMapping("add")
-	public String add(NoticeDTO noticeDTO)throws Exception{
-		int result = noticeService.add(noticeDTO);
+	public String add(QnaDTO qnaDTO)throws Exception{
+		int result = qnaService.add(qnaDTO);
 		
 		return "redirect:./list";
 		
