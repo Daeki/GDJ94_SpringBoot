@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.winter.app.board.BoardDTO;
 import com.winter.app.board.BoardFileDTO;
 import com.winter.app.board.BoardService;
+import com.winter.app.files.FileManager;
 import com.winter.app.util.Pager;
 
 @Service
@@ -20,6 +21,9 @@ public class NoticeService implements BoardService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@Value("${app.upload.notice}")
 	private String uploadPath;
@@ -58,7 +62,7 @@ public class NoticeService implements BoardService {
 			if(f==null || f.isEmpty()) {
 				continue;
 			}
-			String fileName = 
+			String fileName = fileManager.fileSave(file, f);
 			//4. 정보를 DB에 저장
 			BoardFileDTO boardFileDTO = new NoticeFileDTO();
 			boardFileDTO.setFileName(fileName);
