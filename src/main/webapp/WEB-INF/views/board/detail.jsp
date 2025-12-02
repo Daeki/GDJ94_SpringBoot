@@ -42,6 +42,16 @@
                                 </div>
                                 <div class="card-body">
                                    ${dto.boardContents}
+                                   
+                                   
+                                </div>
+                                
+                                <div>
+                                	<c:forEach items="${dto.fileDTOs}" var="file">
+                                		<div>
+                                			<a href="">${file.fileOrigin}</a>
+                                		</div>
+                                	</c:forEach>
                                 </div>
                                 
                                 <div class="card-footer">

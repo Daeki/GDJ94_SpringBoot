@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
 import com.winter.app.board.notice.NoticeDTO;
@@ -63,12 +64,12 @@ public class QnaController {
 	}
 	
 	@PostMapping("add")
-	public String add(QnaDTO qnaDTO)throws Exception{
+	public String add(QnaDTO qnaDTO, MultipartFile [] attach)throws Exception{
 		qnaDTO.setBoardRef(0L);
 		qnaDTO.setBoardDepth(0L);
 		qnaDTO.setBoardStep(0L);
-		int result = qnaService.add(qnaDTO);
-		BoardDTO boardDTO = qnaDTO;
+		int result = qnaService.add(qnaDTO, attach);
+		
 		return "redirect:./list";
 		
 	}

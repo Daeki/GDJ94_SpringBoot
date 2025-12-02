@@ -42,6 +42,7 @@ public class NoticeService implements BoardService {
 	
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO)throws Exception{
+		
 		return noticeDAO.detail(boardDTO);
 	}
 	@Override
@@ -64,7 +65,7 @@ public class NoticeService implements BoardService {
 			}
 			String fileName = fileManager.fileSave(file, f);
 			//4. 정보를 DB에 저장
-			BoardFileDTO boardFileDTO = new NoticeFileDTO();
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setFileOrigin(f.getOriginalFilename());
 			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
