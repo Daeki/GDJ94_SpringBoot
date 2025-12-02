@@ -83,7 +83,11 @@
     	</delete>  	
     	
     	
-    	
+    	   	<!-- fileAdd -->
+    	<insert id="fileAdd" parameterType="BoardFileDTO">
+    		INSERT INTO qna_files 
+    		values (null, #{fileName}, #{fileOrigin}, #{boardNum})
+    	</insert>
     	
     	
 
