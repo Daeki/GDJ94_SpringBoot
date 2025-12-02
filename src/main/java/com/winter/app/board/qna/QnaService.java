@@ -81,7 +81,18 @@ public class QnaService implements BoardService {
 
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
+		boardDTO = qnaDAO.detail(boardDTO);
+		//HDD에서 파일을 삭제
+		if(boardDTO.getFileDTOs() != null) {
+			for(BoardFileDTO boardFileDTO:boardDTO.getFileDTOs()) {
+				File file = new File(uploadPath, boardFileDTO.getFileName());
+				boolean flag = fileManager.fileDelete(file);
+				
+			}
+		}
+		
+		//---------------
+		int result = qnaDAO.fileDelete(boardDTO);
 		return qnaDAO.delete(boardDTO);
 	}
 	

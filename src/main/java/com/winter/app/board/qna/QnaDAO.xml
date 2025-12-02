@@ -89,7 +89,10 @@
     		values (null, #{fileName}, #{fileOrigin}, #{boardNum})
     	</insert>
     	
-    	
+    	<!-- file delete -->
+    	<delete id="fileDelete" parameterType="BoardDTO">
+    		DELETE FROM qna_files WHERE board_num=#{boardNum}
+    	</delete>    	
 
     
     </mapper>
