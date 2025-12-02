@@ -43,7 +43,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">${category} ${sub}</h6>
                                 </div>
                                 <div class="card-body">
-                                   <form method="post">
+                                   <form method="post" enctype="multipart/form-data">
                                    	  <input type="hidden" name="boardNum" value="${dto.boardNum}">
 									  <div class="form-group">
 									    <label for="writer">Writer</label>
@@ -57,6 +57,15 @@
 									  <div class="form-group">
 									    <label for="contents">Contents</label>
 									    <textarea class="form-control" name="boardContents" id="contents" rows="3">${dto.boardContents}</textarea>
+									  </div>
+									  
+									  <div class="form-group">
+									  	<button type="button" id="fileAdd"  class="form-control btn btn-primary" >File Add</button>
+									  	
+									  </div>
+									  
+									  <div id="files" class="form-group">
+									  
 									  </div>
 									
 									  <button type="submit" class="btn btn-primary">Submit</button>
@@ -91,6 +100,7 @@
 <script type="text/javascript">
 	$("#contents").summernote()
 </script>
+<script type="text/javascript" src="/js/board/board.js"></script>
 
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
 import com.winter.app.util.Pager;
@@ -63,8 +64,8 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String add(NoticeDTO noticeDTO)throws Exception{
-		int result = noticeService.add(noticeDTO);
+	public String add(NoticeDTO noticeDTO, MultipartFile [] attach)throws Exception{
+		int result = noticeService.add(noticeDTO, attach);
 		
 		return "redirect:./list";
 		
