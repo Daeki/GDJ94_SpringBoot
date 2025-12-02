@@ -77,6 +77,11 @@
     		INSERT INTO notice_files 
     		values (null, #{fileName}, #{fileOrigin}, #{boardNum})
     	</insert>
+    	
+    	<!-- file delete -->
+    	<delete id="fileDelete" parameterType="BoardDTO">
+    		DELETE FROM notice_files WHERE board_num=#{boardNum}
+    	</delete>
     </mapper>
     
     
