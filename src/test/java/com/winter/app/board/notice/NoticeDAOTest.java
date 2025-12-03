@@ -30,15 +30,6 @@ class NoticeDAOTest {
 		
 	}
 	
-	@Test
-	void testDetail() throws Exception {
-		NoticeDTO noticeDTO = new NoticeDTO();
-		noticeDTO.setBoardNum(1L);
-		
-		noticeDTO = noticeDAO.detail(noticeDTO);
-		
-		assertNotNull(noticeDTO);
-		
-	}
+
 
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/users/**")
 public class UserController {
@@ -36,9 +38,23 @@ public class UserController {
 		return "redirect:/";
 	}
 	@GetMapping("mypage")
-	public void detail(String username,Model model)throws Exception{
-		UserDTO userDTO = userService.detail(username);
+	public void detail(UserDTO userDTO,Model model)throws Exception{
+		userDTO = userService.detail(userDTO);
 		model.addAttribute("user", userDTO);
 	}
+	@GetMapping("login")
+	public void login()throws Exception{}	
+	
+	@PostMapping("login")
+	public String login(UserDTO userDTO, HttpSession session)throws Exception{
+		
+		userDTO = userService.detail(userDTO);
+		
+		
+		session.setAttribute("user", userDTO);
+		
+		return "redirect:/";
+	}
+
 	
 }

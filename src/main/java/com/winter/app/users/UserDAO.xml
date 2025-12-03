@@ -13,7 +13,7 @@
 			(#{fileName}, #{fileOrigin}, #{username})
 		</insert>
     	
-    	<select id="detail" resultMap="detailResult" parameterType="QnaDTO">
+    	<select id="detail" resultMap="detailResult" parameterType="UserDTO">
     		SELECT *
 			FROM users U
 				 LEFT JOIN
