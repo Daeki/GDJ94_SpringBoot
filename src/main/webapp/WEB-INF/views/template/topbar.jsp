@@ -58,18 +58,21 @@
                             
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="localeDropdown">
-                                <a class="dropdown-item d-flex align-items-center" href="./?lang=ko">
+                                <h6 class="dropdown-header">
+                                    Select Language
+                                </h6>                                
+                                <a class="dropdown-item d-flex align-items-center" href="?lang=ko">
                                     <div>
                                         <span class="font-weight-bold">Korea</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="./?lang=en">
+                                <a class="dropdown-item d-flex align-items-center" href="?lang=en">
                                     <div>
                                         <span class="font-weight-bold">English</span>
                                     </div>
                                 </a>
                              
-                                <a class="dropdown-item d-flex align-items-center" href="./?lang=jp">
+                                <a class="dropdown-item d-flex align-items-center" href="?lang=jp">
                                     <div>
                                         <span class="font-weight-bold">Japan</span>
                                     </div>
@@ -207,7 +210,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/users/mypage">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
