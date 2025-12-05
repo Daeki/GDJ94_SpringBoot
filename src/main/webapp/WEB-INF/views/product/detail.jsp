@@ -74,6 +74,14 @@
 					        </p>
 					
 					        <hr>
+					        
+					        <div >
+					        	<table>
+					        		<tbody id="list" data-product-num="${dto.productNum}">
+					        			
+					        		</tbody>
+					        	</table>
+					        </div>
 					
 					        <!-- 버튼 영역 -->
 					        <div class="d-flex justify-content-between mt-3">

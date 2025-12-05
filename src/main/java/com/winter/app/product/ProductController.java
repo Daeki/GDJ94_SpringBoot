@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.winter.app.util.Pager;
 
@@ -94,9 +95,10 @@ public class ProductController {
 	
 	//-----------------------------------------------------
 	@GetMapping("commentList")
-	public void commentList(ProductCommentDTO productCommentDTO, Pager pager)throws Exception{
+	@ResponseBody
+	public List<ProductCommentDTO>  commentList(ProductCommentDTO productCommentDTO, Pager pager)throws Exception{
 		List<ProductCommentDTO> list = productService.commentList(productCommentDTO, pager);
-		System.out.println(list.size());
+		return list;
 	}
 	
 	@PostMapping("commentAdd")
