@@ -18,17 +18,18 @@
      <nav aria-label="Page navigation example">
 	  <ul class="pagination ">
 	    <li class="page-item">
-	      <a class="page-link" href="./list?page=${pager.begin-1}&kind=${param.kind}&search=${param.search}" aria-label="Previous">
+	      <button class="page-link" data-pager-num="${pager.begin-1}" aria-label="Previous">
 	        <span aria-hidden="true">&laquo;</span>
-	      </a>
+	      </button>
 	    </li>
 	    <c:forEach begin="${pager.begin}" end="${pager.end}" var="i">
-	    <li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${param.kind}&search=${param.search}">${i}</a></li>
+	    <li class="page-item">
+	    	<button class="page-link" data-pager-num="${i}">${i}</button></li>
 	    </c:forEach>
 	    <li class="page-item">
-	      <a class="page-link" href="./list?page=${pager.end+1}&kind=${param.kind}&search=${param.search}" aria-label="Next">
+	      <button class="page-link" data-pager-num="${pager.end+1}" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
-	      </a>
+	      </button>
 	    </li>
 	  </ul>
 	</nav>

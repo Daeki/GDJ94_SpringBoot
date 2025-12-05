@@ -143,11 +143,11 @@
 	      <div class="modal-body">
 	       	<form method="post">
 	       		<input type="hidden" value="${dto.productNum}">
-	       		<textarea rows="" cols="" name="boardContents"></textarea>
+	       		<textarea rows="" cols="" id="contents" name="boardContents"></textarea>
 	       	</form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	        <button type="button" id="commentAdd" class="btn btn-primary">댓글등록</button>
 	      </div>
 	    </div>
