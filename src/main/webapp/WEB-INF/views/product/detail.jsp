@@ -87,6 +87,8 @@
 					            </a>
 					
 					            <div>
+					            	<button class="btn btn-danger mr-2 ">장바구니</button>
+					            	
 					            	<button class="btn btn-primary mr-2 " data-toggle="modal" data-target="#commentModal">댓글달기</button>
 					            
 					                <a href="./update?productNum=${dto.productNum}" 

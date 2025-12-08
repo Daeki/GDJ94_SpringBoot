@@ -47,11 +47,11 @@
                                    	  
 									  <div class="form-group">
 									    <label for="writer">Username</label>
-									    <input type="text" class="form-control"  id="username" name="username">
+									    <input type="text" class="form-control" value="test"  id="username" name="username">
 									  </div>
 									  <div class="form-group">
 									    <label for="password">Password</label>
-									    <input type="password" class="form-control"  id="password" name="password">
+									    <input type="password" class="form-control" value="test"  id="password" name="password">
 									  </div>									  
 									 
 									
