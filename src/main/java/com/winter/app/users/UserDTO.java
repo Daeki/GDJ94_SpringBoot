@@ -1,9 +1,12 @@
 package com.winter.app.users;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.validation.constraints.Email;
@@ -39,10 +42,19 @@ public class UserDTO implements UserDetails{
 	private LocalDate birth;
 	private UserFileDTO userFileDTO;
 	
+	private List<RoleDTO> roleDTOs;
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		List<GrantedAuthority> list= new ArrayList<>();
+		
+		for(int i=0;i<roleDTOs.size();i++) {
+			GrantedAuthority g = new SimpleGrantedAuthority(roleDTOs.get(i).getRoleName());
+			list.add(g);
+		}
+		
+		return list;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

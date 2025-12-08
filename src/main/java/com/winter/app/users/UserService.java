@@ -58,6 +58,8 @@ public class UserService {
 		
 		result = userDAO.register(userDTO);
 		
+		result = userDAO.roleAdd(userDTO);
+		
 		if(profile == null || profile.isEmpty()) {
 			return result;
 		}

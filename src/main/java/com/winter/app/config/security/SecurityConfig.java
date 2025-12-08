@@ -50,8 +50,14 @@ public class SecurityConfig {
 			//Login form과 그외 관련 설정
 			.formLogin((form)->{
 				form
+					//로그인폼 jsp 경로로 가는 url과 로그인 처리 url 작성
 					.loginPage("/users/login")
-					.defaultSuccessUrl("/");
+					//.usernameParameter("id")
+					//.passwordParameter("pw")
+					.defaultSuccessUrl("/")
+					//.failureUrl("/")
+					;
+				
 				
 				
 			})
@@ -60,6 +66,8 @@ public class SecurityConfig {
 				logout
 					.logoutUrl("/users/logout")
 					.logoutSuccessUrl("/")
+					.invalidateHttpSession(true)
+					.deleteCookies("JSESSIONID")
 					;
 			})
 			
