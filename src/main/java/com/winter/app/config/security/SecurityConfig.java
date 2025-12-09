@@ -52,6 +52,8 @@ public class SecurityConfig {
 				form
 					//로그인폼 jsp 경로로 가는 url과 로그인 처리 url 작성
 					.loginPage("/users/login")
+					//로그인 진행할 URL
+					.loginProcessingUrl("/users/login")
 					//.usernameParameter("id")
 					//.passwordParameter("pw")
 					.defaultSuccessUrl("/")
