@@ -1,5 +1,6 @@
 package com.winter.app.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private LoginSuccessHandler loginSuccessHandler;
+	
+	@Autowired
+	private LoginFailHandler loginFailHandler;
+	
+	@Autowired
+	private Logout logout;
+	
+	@Autowired
+	private LogoutSucess logoutSucess;
 	
 	//정적자원들을 Security에서 제외
 	@Bean
@@ -56,8 +69,12 @@ public class SecurityConfig {
 					.loginProcessingUrl("/users/login")
 					//.usernameParameter("id")
 					//.passwordParameter("pw")
-					.defaultSuccessUrl("/")
+					//.defaultSuccessUrl("/")
 					//.failureUrl("/")
+					
+					.successHandler(loginSuccessHandler)
+					.failureHandler(loginFailHandler)
+					
 					;
 				
 				
@@ -67,7 +84,9 @@ public class SecurityConfig {
 			.logout((logout)->{
 				logout
 					.logoutUrl("/users/logout")
-					.logoutSuccessUrl("/")
+					//.logoutSuccessUrl("/")
+					.addLogoutHandler(this.logout)
+					.logoutSuccessHandler(logoutSucess)
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
 					;
