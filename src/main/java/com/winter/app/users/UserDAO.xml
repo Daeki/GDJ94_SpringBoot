@@ -10,7 +10,7 @@
 		
 		<insert id="userFileAdd" parameterType="UserFileDTO">
 			INSERT INTO profile (file_name, file_origin, username)
-			(#{fileName}, #{fileOrigin}, #{username})
+			VALUES (#{fileName}, #{fileOrigin}, #{username})
 		</insert>
 		
 		<insert id="roleAdd" parameterType="UserDTO">
