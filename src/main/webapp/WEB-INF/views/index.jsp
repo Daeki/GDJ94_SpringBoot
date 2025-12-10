@@ -61,7 +61,7 @@
                     
                    <sec:authorize access="!isAuthenticated()">
                     	<h1>Login 필요</h1>
-                    
+                    	<a href="/oauth2/authorization/kakao">카카오로그인</a>
                     </sec:authorize>
                     
                     </div>
