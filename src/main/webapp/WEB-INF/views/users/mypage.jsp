@@ -53,6 +53,7 @@
                                 	
                                 	<a href="./update" class="btn btn-primary">Update</a>
 									<a href="./change" class="btn btn-danger">비번변경</a>
+									<a href="./delete" class="btn btn-info">회원탈퇴</a>
                                 </div>
                              </div>
                              
