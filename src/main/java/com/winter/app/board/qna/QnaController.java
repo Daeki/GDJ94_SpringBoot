@@ -40,9 +40,6 @@ public class QnaController {
 	@GetMapping("list")
 	public String list(Pager pager, Model model)throws Exception{
 		
-		if(pager != null) {
-			throw new NullPointerException();
-		}
 
 		List<BoardDTO> list= qnaService.list(pager);
 		
