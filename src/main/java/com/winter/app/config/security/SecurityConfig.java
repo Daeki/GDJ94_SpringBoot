@@ -3,6 +3,7 @@ package com.winter.app.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.winter.app.config.security.jwt.JwtAuthenticationFilter;
 import com.winter.app.config.security.jwt.JwtLoginFilter;
 import com.winter.app.config.security.jwt.JwtTokenManager;
 import com.winter.app.users.UserDetailSerivceImpl;
@@ -36,8 +38,13 @@ public class SecurityConfig {
 	@Autowired
 	private UserDetailSerivceImpl detailSerivceImpl;
 	
+	//----------- JWT 추가 ------------------------------------
+	
 	@Autowired
 	private JwtTokenManager jwtTokenManager;
+	
+	@Autowired
+	private AuthenticationConfiguration authenticationConfiguration;
 	
 	//정적자원들을 Security에서 제외
 	@Bean
@@ -103,7 +110,8 @@ public class SecurityConfig {
 				h.disable();
 			})
 			
-			.addFilter(new JwtLoginFilter(jwtTokenManager))
+			.addFilter(new JwtAuthenticationFilter(jwtTokenManager, authenticationConfiguration.getAuthenticationManager()))
+			.addFilter(new JwtLoginFilter(jwtTokenManager, authenticationConfiguration.getAuthenticationManager()))
 			
 			.oauth2Login(t -> {
 				t.userInfoEndpoint((s)->{

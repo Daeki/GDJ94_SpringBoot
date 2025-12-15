@@ -5,10 +5,17 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.winter.app.users.UserDAO;
+import com.winter.app.users.UserDTO;
+
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -29,6 +36,9 @@ public class JwtTokenManager {
 	private String secret;
 	
 	private SecretKey key;
+	
+	@Autowired
+	private UserDAO userDAO;
 	
 	@PostConstruct
 	public void init() {
@@ -68,4 +78,41 @@ public class JwtTokenManager {
 				;
 		
 	}
+	
+	//Token 검증
+	public Authentication getAuthenticationByToken(String token) throws Exception {
+		
+		//검증
+		Claims claims = 
+				Jwts
+				.parser()
+				.verifyWith(key)
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				;
+		
+		//검증성공, 검증실패시 Exception 발생
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUsername(claims.getSubject());
+		
+		UserDetails userDetails = userDAO.detail(userDTO);
+		
+		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+		
+		return authentication;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

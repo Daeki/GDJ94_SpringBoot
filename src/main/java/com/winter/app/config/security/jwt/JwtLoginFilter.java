@@ -2,6 +2,7 @@ package com.winter.app.config.security.jwt;
 
 import java.io.IOException;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -9,16 +10,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 
+	private AuthenticationManager authenticationManager;
+	
 	private JwtTokenManager tokenManager;
 	
-	public JwtLoginFilter(JwtTokenManager tokenManager) {
+	public JwtLoginFilter(JwtTokenManager tokenManager, AuthenticationManager authenticationManager) {
 		this.setFilterProcessesUrl("/users/loginProcess");
 		this.tokenManager=tokenManager;
+		this.authenticationManager = authenticationManager;
 	}
 	
 	@Override
@@ -35,15 +40,30 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 		//패스워드가 일치하는지 판별하고 Authentication객체를 
 		//SecurityContextHolder에 넣어줌
 		
-		return super.attemptAuthentication(request, response);
+		return authenticationManager.authenticate(authenticationToken);
 	}
 	
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		String token = tokenManager.makeAccessToken(authResult);
-		System.out.println(token);
+		String accesstoken = tokenManager.makeAccessToken(authResult);
+		String refreshToken = tokenManager.makeRefreshToken(authResult);
+		
+		Cookie cookie = new Cookie("access-token", accesstoken);
+		cookie.setPath("/");
+		cookie.setMaxAge(60);
+		cookie.setHttpOnly(true);
+		
+		response.addCookie(cookie);
+		
+		cookie = new Cookie("refresh-token", refreshToken);
+		cookie.setPath("/");
+		cookie.setMaxAge(60);
+		cookie.setHttpOnly(true);
+		response.addCookie(cookie);
+		
+		response.sendRedirect("/");
 	}
 	
 	@Override
