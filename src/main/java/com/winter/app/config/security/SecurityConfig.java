@@ -6,10 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.winter.app.config.security.jwt.JwtLoginFilter;
+import com.winter.app.config.security.jwt.JwtTokenManager;
 import com.winter.app.users.UserDetailSerivceImpl;
 
 import jakarta.websocket.Session;
@@ -32,6 +35,9 @@ public class SecurityConfig {
 	
 	@Autowired
 	private UserDetailSerivceImpl detailSerivceImpl;
+	
+	@Autowired
+	private JwtTokenManager jwtTokenManager;
 	
 	//정적자원들을 Security에서 제외
 	@Bean
@@ -69,23 +75,9 @@ public class SecurityConfig {
 			
 			//Login form과 그외 관련 설정
 			.formLogin((form)->{
-				form
-					//로그인폼 jsp 경로로 가는 url과 로그인 처리 url 작성
-					.loginPage("/users/login")
-					//로그인 진행할 URL
-					.loginProcessingUrl("/users/login")
-					//.usernameParameter("id")
-					//.passwordParameter("pw")
-					//.defaultSuccessUrl("/")
-					//.failureUrl("/")
-					
-					.successHandler(loginSuccessHandler)
-					.failureHandler(loginFailHandler)
-					
-					;
-				
-				
-				
+				//front 분리
+				form.disable();
+						
 			})
 			
 			.logout((logout)->{
@@ -97,28 +89,21 @@ public class SecurityConfig {
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
 					.deleteCookies("remember-me")
+					.deleteCookies("access-token", "refresh-token")
 					;
 			})
 			
-			.rememberMe(remember->{
-				remember
-						.rememberMeParameter("rememberme")
-						//.tokenValiditySeconds(60)
-						.key("rememberkey")
-						.userDetailsService(detailSerivceImpl)
-						.authenticationSuccessHandler(loginSuccessHandler)
-						.useSecureCookie(true)
-						;
-			})
 			.sessionManagement(session ->{
 				session
-						//.invalidSessionUrl("/")
-						.maximumSessions(1)
-						.maxSessionsPreventsLogin(false)
-						.expiredUrl("/users/login")
-						
+					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 						;
 			})
+			
+			.httpBasic((h)->{
+				h.disable();
+			})
+			
+			.addFilter(new JwtLoginFilter(jwtTokenManager))
 			
 			.oauth2Login(t -> {
 				t.userInfoEndpoint((s)->{
