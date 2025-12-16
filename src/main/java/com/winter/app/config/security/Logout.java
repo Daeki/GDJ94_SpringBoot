@@ -45,7 +45,7 @@ public class Logout implements LogoutHandler{
 //		System.out.println(result.block());
 		//카카오 계정과 함께 로그아웃
 		UserDTO userDTO = (UserDTO)authentication.getPrincipal();
-		if(userDTO.getSns() != null) {
+		if(userDTO.getSns() != null || !userDTO.getSns().equals("")) {
 			try {
 				response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id="+restKey+"&logout_redirect_uri=http://localhost:81");
 			} catch (IOException e) {
